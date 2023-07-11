@@ -1,4 +1,6 @@
 devenv
 myenv
 outputs
-input
+inputs
+tmp
+.DS_Store

@@ -6,7 +6,7 @@ import botocore
 lambda_client = boto3.client("lambda")
 
 function_name = "GeneratePresignURL"
-video_name = "raj-bb.mp4"
+video_name = "obj.txt"
 function_params = {"video_id": video_name}
 try:
     response = lambda_client.invoke(
@@ -28,3 +28,4 @@ input_videos = {"file": open(local_video_path, "rb")}
 r = requests.post(payload["url"], data=payload["fields"], files=input_videos)
 
 print(r.status_code)
+print(r.text)
