@@ -12,8 +12,8 @@ def lambda_handler(event, context):
     video_name = os.path.split(key)[1]
 
     # download a video file from S3
-    local_dir = "tmp/"
-    # local_dir = "/tmp/"
+    # local_dir = "tmp/"
+    local_dir = "/tmp/"
     local_input_path = local_dir + video_name
     s3_client = boto3.client('s3')
     try:
