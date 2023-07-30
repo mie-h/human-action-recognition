@@ -12,14 +12,15 @@ def lambda_handler(event, context):
     video_name = os.path.split(key)[1]
 
     # download a video file from S3
-    # local_dir = "tmp/"
+    # os.chdir('/tmp')
+    # local_dir = "./"
     local_dir = "/tmp/"
     local_input_path = local_dir + video_name
     s3_client = boto3.client('s3')
     try:
         s3_client.download_file(bucket, key, local_input_path)
         print(f"Successfully downloaded object '{key}' from S3 bucket '{bucket}' to '{local_input_path}'.")
-        object = s3_client.head_object(Bucket=bucket, Key=key)
+        # object = s3_client.head_object(Bucket=bucket, Key=key)
         webhoook_url = ...
     except botocore.exceptions.ClientError as e:
         print(f"Error downloading object '{key}' from S3 bucket '{bucket}': {str(e)}")

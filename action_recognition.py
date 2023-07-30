@@ -93,11 +93,11 @@ def action_recognition(input, local_dir="tmp/", clip_len=16):
                     lineType=cv2.LINE_AA,
                 )
                 clips.pop(0)
-                cv2.imshow("image", image)
+                # cv2.imshow("image", image)
                 out.write(image)
                 # press `q` to exit
-                if cv2.waitKey(wait_time) & 0xFF == ord("q"):
-                    break
+                # if cv2.waitKey(wait_time) & 0xFF == ord("q"):
+                #     break
         else:
             break
 
