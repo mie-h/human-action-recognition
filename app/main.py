@@ -40,8 +40,8 @@ clip_len = 16
 action_recognition(local_input_path, local_dir, clip_len)
 
 # save the output video to S3
-local_output_path = os.path.splitext(local_input_path)[0] + "_output.mp4"
-key_output_path = "outputs/" + os.path.splitext(video_name)[0] + "_output.mp4"
+local_output_path = os.path.splitext(local_input_path)[0] + "-output.mp4"
+key_output_path = "outputs/" + os.path.splitext(video_name)[0] + "-output.mp4"
 try:
     print(f"upload file '{local_output_path}' to bucket '{bucket}' and key '{key_output_path}'")
     s3_client.upload_file(local_output_path, bucket, key_output_path)

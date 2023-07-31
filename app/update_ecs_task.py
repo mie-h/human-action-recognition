@@ -4,6 +4,11 @@ By using put_target, you can configure InputTransformer which you cannot config 
 """
 import boto3
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+REGION = config.get('AWS', 'REGION')
+
 try:
     client = boto3.client("events")
     response = client.put_targets(
@@ -11,7 +16,8 @@ try:
         Targets=[
             {
                 "Id": "1",
-                "Arn": "arn:aws:ecs:us-west-1:963675165738:cluster/test-dev-cluster",
+                "Arn": f"arn:aws:ecs:{REGION}:{}}:cluster/test-dev-cluster",
+                "Arn": f"arn:aws:ecs:{REGION}:{}:cluster/test-dev-cluster",
                 "RoleArn": "arn:aws:iam::963675165738:role/service-role/Amazon_EventBridge_Invoke_ECS_1604031748",
                 "InputTransformer": {
                     "InputPathsMap": {
@@ -26,7 +32,7 @@ try:
                     "LaunchType": "FARGATE",
                     "NetworkConfiguration": {
                         "awsvpcConfiguration": {
-                            "Subnets": ["subnet-0b782f7d74e4a9f2c", "subnet-0e7a6e2063eb9c880"],
+                            "Subnets": ["suebnet-0b782f7d744a9f2c", "subnet-0e7a6e2063eb9c880"],
                             "SecurityGroups": ["sg-08c5c1ce710c75479"],
                             "AssignPublicIp": "ENABLED",
                         }

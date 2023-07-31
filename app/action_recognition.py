@@ -29,7 +29,7 @@ def action_recognition(input, local_dir="./", clip_len=16):
     save_name = f"{input.split('/')[-1].split('.')[0]}"
     # define codec and create VideoWriter object
     out = cv2.VideoWriter(
-        f"{local_dir}{save_name}_output.mp4",
+        f"{local_dir}{save_name}-output.mp4",
         cv2.VideoWriter_fourcc(*"mp4v"),
         30,
         (frame_width, frame_height),
@@ -85,10 +85,10 @@ def action_recognition(input, local_dir="./", clip_len=16):
                 cv2.putText(
                     image,
                     label,
-                    (15, 25),
-                    cv2.FONT_HERSHEY_SIMPLEX,
+                    (50, 50),
+                    cv2.FONT_HERSHEY_DUPLEX,
                     0.8,
-                    (0, 0, 255),
+                    (125, 246, 55),
                     2,
                     lineType=cv2.LINE_AA,
                 )
@@ -117,3 +117,7 @@ def main():
     args = vars(parser.parse_args())
     #### PRINT INFO #####
     print(f"Number of frames to consider for each prediction: {args['clip_len']}")
+    action_recognition(args["input"])
+
+if __name__ == "__main__":
+    main()
