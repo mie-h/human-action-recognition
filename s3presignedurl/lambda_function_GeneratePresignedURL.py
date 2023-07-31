@@ -32,7 +32,6 @@ def lambda_handler(event, context):
     # Generate a pre-signed URL for uploading the object
     try:
         presigned_url = s3.generate_presigned_post(
-            # ClientMethod='put_object',
             Bucket=bucket_name,
             Key=object_key,
             Fields=fields,
