@@ -1,6 +1,21 @@
+# python venv
 devenv
 myenv
+
+# videos
 outputs
 inputs
+*.mp4
+
+# lambda environment
 tmp
+
+# cache
 .DS_Store
+__pycache__
+
+# deploy
+deploy
+
+# client
+client/__pycache__

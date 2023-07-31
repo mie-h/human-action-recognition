@@ -1,11 +1,18 @@
+"""
+Main application file. This is the entry point of triggered and initialized ECS task.
+"""
 import os
 import requests
 import boto3
 import botocore
+import configparser
 from action_recognition import action_recognition
 
-bucket = "human-action-recognition-bucket"
-key = os.getenv("S3_KEY")
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+bucket = config.get('AWS', 'BUCKET')
+key = os.getenv("S3_KEY")    # get key from ECS env. variable
 
 if not key:
     print("key is empty")
@@ -14,7 +21,7 @@ if not key:
 key_input_path = os.path.split(key)[0]
 video_name = os.path.split(key)[1]
 
-local_dir = "./"
+local_dir = config.get('DIR', 'LOCAL_DIR')
 local_input_path = local_dir + video_name
 s3_client = boto3.client('s3')
 try:

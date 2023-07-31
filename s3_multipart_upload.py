@@ -1,3 +1,7 @@
+"""
+Upload a video using presigned url + multi-part upload 
+for video upload performance improvement.
+"""
 import requests
 import boto3
 import botocore

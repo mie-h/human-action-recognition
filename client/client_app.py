@@ -1,11 +1,15 @@
 import boto3
 import botocore
+import configparser
 import json
 import requests
 import shutil
 from fastapi import FastAPI
 
 app = FastAPI()
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 @app.get("/")
@@ -14,16 +18,15 @@ def root():
 
 
 @app.get("/upload")
-def upload_video():
+def upload_video(video_name: str):
     lambda_client = boto3.client("lambda")
 
     # this part must be replaced with API Gateway call
-    video_name = "raj-bb.mp4"
-    webhook_url = "http://127.0.0.1:8000/postprocessing"
+    webhook_url = config.get('URL', 'WEBHOOK_URL')
     payload = {"video_id": video_name, "webhook_url": webhook_url}
-    url_apigateway = f"https://yh89nuinqe.execute-api.us-west-1.amazonaws.com/prod/getpresignedurl"
+    apigateway_url = config.get('URL', 'APIGATEWAY_URL')
 
-    response = requests.get(url_apigateway, params=payload)
+    response = requests.get(apigateway_url, params=payload)
     print(response)
 
     content = json.loads(response.text)
@@ -47,5 +50,5 @@ def post_processing(presignedurl: str):
     print(f"Recieved presigned url {presignedurl}")
     response = requests.get(presignedurl)
     if response.status_code == 200:
-        with open("client_output.mp4", "wb") as f:
+        with open(config.get('FILES', 'OUTPUT_VIDEO_FILE'), "wb") as f:
             f.write(response.content) 

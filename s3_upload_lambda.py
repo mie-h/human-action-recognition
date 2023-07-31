@@ -1,3 +1,7 @@
+"""
+Upload a video file to S3 by directly invoking "GeneratePresignURL" lambda function.
+This lambda function is not publicly accessible. 
+"""
 import requests
 import json
 import boto3
@@ -16,6 +20,7 @@ try:
 except botocore.exceptions.ClientError as error:
     print("Couldn't invoke function %s.", function_name)
     raise
+
 
 print(response["StatusCode"])
 

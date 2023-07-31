@@ -9,7 +9,7 @@ import utils
 
 
 
-def action_recognition(input, local_dir="tmp/", clip_len=16):
+def action_recognition(input, local_dir="./", clip_len=16):
 
     # get the lables
     class_names = utils.class_names

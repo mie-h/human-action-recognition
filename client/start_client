@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source ../myenv/bin/activate
+uvicorn client_app:app --reload

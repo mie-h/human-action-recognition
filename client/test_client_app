@@ -1,0 +1,6 @@
+#!/bin/bash
+
+video_name="raj-archery.mp4"
+
+# start fastapi before running this script
+curl "http://127.0.0.1:8000/upload?video_name=${video_name}"
