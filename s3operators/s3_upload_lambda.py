@@ -27,7 +27,6 @@ print(response["StatusCode"])
 payload = eval(response["Payload"].read().decode("utf-8"))
 print(payload)
 
-# hwo to add metadata to s3 object when I upload
 local_video_path = "./input/" + video_name
 input_videos = {"file": open(local_video_path, "rb")}
 r = requests.post(payload["url"], data=payload["fields"], files=input_videos)

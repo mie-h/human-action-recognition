@@ -14,7 +14,6 @@ try:
     s3_client.download_file(bucket, key, local_input_path)
     object = s3_client.head_object(Bucket=bucket, Key=key)
     print(f"Successfully downloaded object '{key}' from S3 bucket '{bucket}' to '{local_input_path}'.")
-    print(object)
 except botocore.exceptions.ClientError as e:
     print(f"Error downloading object '{key}' from S3 bucket '{bucket}': {str(e)}")
 except s3_client.exceptions.LimitExceedException as e:

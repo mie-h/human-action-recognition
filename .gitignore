@@ -19,6 +19,7 @@ deploy
 
 # client
 client/__pycache__
+client/config.ini
 
 # app
 app/config.ini

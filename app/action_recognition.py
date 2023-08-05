@@ -93,17 +93,12 @@ def action_recognition(input, local_dir="./", clip_len=16):
                     lineType=cv2.LINE_AA,
                 )
                 clips.pop(0)
-                # cv2.imshow("image", image)
                 out.write(image)
-                # press `q` to exit
-                # if cv2.waitKey(wait_time) & 0xFF == ord("q"):
-                #     break
         else:
             break
 
 
 def main():
-    # construct the argument parser
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", help="path to input video")
     parser.add_argument(
@@ -115,7 +110,7 @@ def main():
         help="number of frames to consider for each prediction",
     )
     args = vars(parser.parse_args())
-    #### PRINT INFO #####
+ 
     print(f"Number of frames to consider for each prediction: {args['clip_len']}")
     action_recognition(args["input"])
 
