@@ -23,3 +23,9 @@ client/config.ini
 
 # app
 app/config.ini
+
+# s3presignedurl
+s3presignedurl/config.ini
+
+# memo
+thingstodo.txt

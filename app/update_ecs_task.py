@@ -9,6 +9,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+RULE_NAME = config.get('AWS', 'RULE_NAME')
 REGION = config.get('AWS', 'REGION')
 ACCOUNT_ID = config.get('AWS', 'ACCOUNT_ID')
 CLUSTER_NAME = config.get('AWS', 'CLUSTER_NAME')
@@ -21,7 +22,7 @@ SECURITY_GROUPS = json.loads(config.get('AWS', 'SECURITY_GROUPS'))
 try:
     client = boto3.client("events")
     response = client.put_targets(
-        Rule="human-action-recognition-event-rule",
+        Rule=RULE_NAME,
         Targets=[
             {
                 "Id": "1",

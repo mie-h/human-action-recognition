@@ -21,7 +21,6 @@ def root():
 def upload_video(video_name: str):
     lambda_client = boto3.client("lambda")
 
-    # this part must be replaced with API Gateway call
     webhook_url = config.get('URL', 'WEBHOOK_URL')
     payload = {"video_id": video_name, "webhook_url": webhook_url}
     apigateway_url = config.get('URL', 'APIGATEWAY_URL')
