@@ -38,13 +38,25 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
 
 <!-- free campus. be as creative as you want :D -->
 
-- Both input and output videos are saved in the same S3 bucket. For the EventBridge rule on S3 PUT OBJECT, input and output videos should be in the separate buckets to avoid infinite cycle for the best practice.
+* Both input and output videos are saved in the same S3 bucket. For the EventBridge rule on S3 PUT OBJECT, input and output videos should be in the separate buckets to avoid infinite cycle for the best practice.
 <!-- * thoughts on Volume/Scale/QPS/latency -->
+
+* Scalability
+    * Currently, ECS task is created every time an input video is uploaded to S3 bucket and exits after the Machine Learning prediction and processing is done. For higher availability of processing in ECS, deploy an ECS task so that it continuously listen to incoming requests 
+    * Lambda function that provides presiged url and S3 bucket for video storage are highly scalable.
+* Latency
+    <!-- * time it takes to process a video of size ... is ... -->
+    * With webhook url, the client side does not have to wait for the processing completion.
+    * Multi-part upload can improve the performance of video uplaod.
+    * Reduce the cold time of AWS lambda with provisioned concurrency.
+* QPS
+    * max. number of concurrent lambda function invocation is 1000 per AWS Region. 
+    
 
 # Things I learned
 * [Passing S3 PutObject event data to ECS task](https://github.com/mie-h/passing-event-data-ecs-task/tree/main)
 * [multipart upload + presigned url](https://github.com/mie-h/multipart-upload-presignedurl)
-
+<!-- write about with and without multipart upload -->
 
 
 # Acknowledgments
