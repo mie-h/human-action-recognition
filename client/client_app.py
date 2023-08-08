@@ -20,7 +20,7 @@ def root():
 @app.get("/upload")
 def upload_video(video_name: str):
     """Get presigned url and upload a video to S3 bucket
-    Parameters
+    Parameters 
     ----------
     video_name : string
         path to the input video
