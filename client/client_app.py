@@ -58,7 +58,7 @@ def upload_video(video_name: str):
 def post_processing(presignedurl: str):
     """Receives presigned url to download an output video from S3 and saves it to your local disk space.
     This endpoint is called by a service inside ECS task.
-    Parameters 
+    Parameters
     ----------
     presignedurl : string
         s3 presigned url to download a video file
