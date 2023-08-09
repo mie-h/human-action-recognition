@@ -10,6 +10,9 @@ from action_recognition import action_recognition
 
 
 def download_input(s3_client, bucket, key, local_input_path):
+    """Downloads an input video from S3 bucket and get webhook url from S3 metadata of the input video object.
+    returns webhook url
+    """
     try:
         s3_client.download_file(bucket, key, local_input_path)
         print(f"Successfully downloaded object '{key}' from S3 bucket '{bucket}' to '{local_input_path}'.")
@@ -18,12 +21,13 @@ def download_input(s3_client, bucket, key, local_input_path):
         print(f"Recieved webhook url : {webhook_url}")
     except botocore.exceptions.ClientError as e:
         print(f"Error downloading object '{key}' from S3 bucket '{bucket}': {str(e)}")
-        exit()
+        return
     return webhook_url
 
 
 def upload_output(s3_client, local_input_path, video_name, bucket):
-    # save the output video to S3
+    """Save the output video to S3
+    """
     local_output_path = os.path.splitext(local_input_path)[0] + "-output.mp4"
     key_output_path = "outputs/" + os.path.splitext(video_name)[0] + "-output.mp4"
     try:
@@ -32,11 +36,12 @@ def upload_output(s3_client, local_input_path, video_name, bucket):
         print(f"Successfully uploaded object '{local_output_path}' to S3 bucket '{bucket}' with key '{key_output_path}'.")
     except botocore.exceptions.ClientError as e:
         print(f"Error uploading object '{local_output_path}' to S3 bucket '{bucket}': {str(e)}")
-        exit()
+        return
 
 
 def get_presignedurl_download(s3_client, bucket, key_output_path):
-    # get presigned url to download an output file and call webhook url
+    """Get presigned url to download an output file and call webhook url
+    """
     try:
         presignedurl = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bucket,
@@ -57,7 +62,7 @@ if __name__ == '__main__':
 
     if not key:
         print("key is empty")
-        exit()
+        return
 
     key_input_path = os.path.split(key)[0]
     video_name = os.path.split(key)[1]
