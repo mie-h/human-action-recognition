@@ -47,7 +47,9 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
 * Latency
     <!-- * time it takes to process a video of size ... is ... -->
     * With webhook url, the client side does not have to wait for the processing completion.
-    * Multi-part upload can improve the performance of video uplaod.
+       * The frontend provides a webhook url as well as an input video to S3, then the rest of the processing is done asynchronously.
+       * Without the webhook url, it takes at least a few minutes to complete the processing.   
+    * Multi-part upload can improve the performance of video upload.
     * Reduce the cold time of AWS lambda with provisioned concurrency.
 * QPS
     * max. number of concurrent lambda function invocation is 1000 per AWS Region. 
