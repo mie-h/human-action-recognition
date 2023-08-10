@@ -13,7 +13,7 @@ video here
 need to reduce the video size -->
 
 
-# How It Works
+# 🌟 How It Works
 
 Get S3 presigned URL with from API Gateway, and upload an input video to S3 bucket using the presigned URL.
 
@@ -29,12 +29,12 @@ The triggered and initialized ECS task does the human action recognition predict
 ![](images/HAR_phase3.drawio.png)
 
 
-# Usage
+# 🏃🏻‍♀️ Usage
 
 I implemented [a simple client side code](https://github.com/mie-h/human-action-recognition/blob/main/client/client_app.py) using FastAPI. Please refer to this page for how to use this service. 
 
 
-# Thoughts and Optimization
+# 💭 Thoughts and Optimization
 
 <!-- free campus. be as creative as you want :D -->
 
@@ -55,12 +55,12 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
     * max. number of concurrent lambda function invocation is 1000 per AWS Region. 
     
 
-# Things I learned
+# 💡 Things I learned
 * [Passing S3 PutObject event data to ECS task](https://github.com/mie-h/passing-event-data-ecs-task/tree/main)
 * [multipart upload + presigned url](https://github.com/mie-h/multipart-upload-presignedurl)
 <!-- write about with and without multipart upload -->
 
 
-# Acknowledgments
+# 🤝 Acknowledgments
 
 * [Human Action Recognition in Videos using PyTorch](https://debuggercafe.com/human-action-recognition-in-videos-using-pytorch/)
