@@ -54,6 +54,8 @@ def action_recognition(input, local_dir="./", clip_len=16):
             start_time = time.time()
             image = frame.copy()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            # get the frame height and width
+            image_height, image_width = frame.shape[:2]
             frame = utils.transform(image=frame)["image"]
             clips.append(frame)
             if len(clips) == clip_len:
@@ -82,14 +84,20 @@ def action_recognition(input, local_dir="./", clip_len=16):
                 # increment frame count
                 frame_count += 1
                 wait_time = max(1, int(fps / 4))
+                # get test size
+                text_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_DUPLEX, font_scale, thickness)[0]
+                # coordinate of label on video
+                x = (image_width - text_size[0]) // 2
+                ont_scale = 0.8
+                thickness = 2
                 cv2.putText(
                     image,
                     label,
-                    (50, 50),
+                    (x, 50),
                     cv2.FONT_HERSHEY_DUPLEX,
-                    0.8,
+                    font_scale,
                     (125, 246, 55),
-                    2,
+                    thickness,
                     lineType=cv2.LINE_AA,
                 )
                 clips.pop(0)

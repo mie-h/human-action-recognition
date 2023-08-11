@@ -1,7 +1,10 @@
 """
 Main application file. This is the entry point of triggered and initialized ECS task.
+
+To test locally, set a path to an input file to environmental variable S3_KEY and run main.py.
 """
 import os
+import sys
 import requests
 import boto3
 import botocore
@@ -21,12 +24,14 @@ def download_input(s3_client, bucket, key, local_input_path):
         print(f"Recieved webhook url : {webhook_url}")
     except botocore.exceptions.ClientError as e:
         print(f"Error downloading object '{key}' from S3 bucket '{bucket}': {str(e)}")
+        sys.exit(1)
         return
     return webhook_url
 
 
 def upload_output(s3_client, local_input_path, video_name, bucket):
     """Save the output video to S3
+    returns path to the output file in S3
     """
     local_output_path = os.path.splitext(local_input_path)[0] + "-output.mp4"
     key_output_path = "outputs/" + os.path.splitext(video_name)[0] + "-output.mp4"
@@ -36,7 +41,8 @@ def upload_output(s3_client, local_input_path, video_name, bucket):
         print(f"Successfully uploaded object '{local_output_path}' to S3 bucket '{bucket}' with key '{key_output_path}'.")
     except botocore.exceptions.ClientError as e:
         print(f"Error uploading object '{local_output_path}' to S3 bucket '{bucket}': {str(e)}")
-        return
+        sys.exit(1)
+    return key_output_path
 
 
 def get_presignedurl_download(s3_client, bucket, key_output_path):
@@ -49,7 +55,7 @@ def get_presignedurl_download(s3_client, bucket, key_output_path):
                                                     ExpiresIn=300)
     except ClientError as e:
         print(f"Error generating presigend url to get object from S3 bucket '{bucket}' with key '{key_output_path}'. {e}")
-        exit()
+        sys.exit(1)
     return presignedurl
 
 
@@ -62,7 +68,7 @@ if __name__ == '__main__':
 
     if not key:
         print("key is empty")
-        return
+        sys.exit(1)
 
     key_input_path = os.path.split(key)[0]
     video_name = os.path.split(key)[1]
@@ -77,10 +83,10 @@ if __name__ == '__main__':
     clip_len = 16
     action_recognition(local_input_path, local_dir, clip_len)
 
-    upload_output(s3_client, local_input_path, video_name, bucket)
+    key_output_path = upload_output(s3_client, local_input_path, video_name, bucket)
 
     presignedurl = get_presignedurl_download(s3_client, bucket, key_output_path)
 
     payload = {'presignedurl': presignedurl}
     r = requests.get(webhook_url, params=payload)
-    print (r.status_code) 
+    print(r.status_code) 
