@@ -2,7 +2,15 @@
 
 A service that predicts human action in a video using pre-trained PyTorch models. Deployed on AWS Cloud using ECS, S3, EventBridge, and lambda. 
 
-<!-- Example output 1: basketball
+
+
+https://github.com/mie-h/human-action-recognition/assets/56993977/1975c775-f002-4511-9bbd-f802cf5523f4
+
+
+
+<!-- Example output 1: 
+
+basketball
 
 video here
 need to reduce the video size
