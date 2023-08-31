@@ -23,7 +23,7 @@ need to reduce the video size -->
 
 # 🌟 How It Works
 
-Get S3 presigned URL with from API Gateway, and upload an input video to S3 bucket using the presigned URL.
+Get S3 presigned URL from API Gateway, and upload an input video to S3 bucket using the presigned URL.
 
 ![](images/HAR_phase1.drawio.png)
 
@@ -46,21 +46,21 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
 
 <!-- free campus. be as creative as you want :D -->
 
-* Both input and output videos are saved in the same S3 bucket. For the EventBridge rule on S3 PUT OBJECT, input and output videos should be in the separate buckets to avoid infinite cycle for the best practice.
+* Both input and output videos are saved in the same S3 bucket. For the EventBridge rule on S3 PUT OBJECT, input and output videos should be in separate buckets to avoid infinite cycles for the best practice.
 <!-- * thoughts on Volume/Scale/QPS/latency -->
 
 * Scalability
-    * Currently, ECS task is created every time an input video is uploaded to S3 bucket and exits after the Machine Learning prediction and processing is done. For higher availability of processing in ECS, deploy an ECS task so that it continuously listen to incoming requests 
-    * Lambda function that provides presiged url and S3 bucket for video storage are highly scalable.
+    * Currently, ECS task is created every time an input video is uploaded to S3 bucket and exits after the Machine Learning prediction and processing is done. For higher availability of processing in ECS, deploy an ECS task so that it continuously listens to incoming requests 
+    * Lambda function that provides presigned url and S3 bucket for video storage is highly scalable.
 * Latency
     <!-- * time it takes to process a video of size ... is ... -->
     * With webhook url, the client side does not have to wait for the processing completion.
        * The frontend provides a webhook url as well as an input video to S3, then the rest of the processing is done asynchronously. For more detail, look at [client_app.py](https://github.com/mie-h/human-action-recognition/blob/main/client/client_app.py)
        * Without the webhook url, it takes at least a few minutes to complete the processing.   
     * Multi-part upload can improve the performance of video upload.
-    * Reduce the cold strat time of AWS lambda with provisioned concurrency.
+    * Reduce the cold start time of AWS lambda with provisioned concurrency.
 * QPS
-    * max. number of concurrent lambda function invocation is 1000 per AWS Region. 
+    * max. number of concurrent lambda function invocations is 1000 per AWS Region. 
     
 
 # 💡 Things I learned
