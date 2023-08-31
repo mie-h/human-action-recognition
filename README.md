@@ -1,6 +1,6 @@
 # Human Action Recognition
 
-A service that predicts human action in a video using pre-trained PyTorch models. Deployed on AWS Cloud using ECS, S3, EventBridge, and lambda. 
+A service that predicts human action in a video using pre-trained [Resnet 3D](https://github.com/kenshohara/3D-ResNets-PyTorch/blob/master/models/resnet.py) PyTorch models. Deployed on AWS Cloud using ECS, S3, EventBridge, and lambda. 
 
 
 
@@ -66,9 +66,6 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
 # 💡 Things I learned
 * [Passing S3 PutObject event data to ECS task](https://github.com/mie-h/passing-event-data-ecs-task/tree/main)
 * [multipart upload + presigned url](https://github.com/mie-h/multipart-upload-presignedurl)
+* Using [PyTorch model](https://pytorch.org/vision/stable/models.html)
 <!-- write about with and without multipart upload -->
 
-
-# 🤝 Acknowledgments
-
-* [Human Action Recognition in Videos using PyTorch](https://debuggercafe.com/human-action-recognition-in-videos-using-pytorch/)
