@@ -58,7 +58,7 @@ I implemented [a simple client side code](https://github.com/mie-h/human-action-
        * The frontend provides a webhook url as well as an input video to S3, then the rest of the processing is done asynchronously. For more detail, look at [client_app.py](https://github.com/mie-h/human-action-recognition/blob/main/client/client_app.py)
        * Without the webhook url, it takes at least a few minutes to complete the processing.   
     * Multi-part upload can improve the performance of video upload.
-    * Reduce the cold time of AWS lambda with provisioned concurrency.
+    * Reduce the cold strat time of AWS lambda with provisioned concurrency.
 * QPS
     * max. number of concurrent lambda function invocation is 1000 per AWS Region. 
     
