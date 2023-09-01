@@ -1,6 +1,6 @@
 # Human Action Recognition
 
-A service that predicts human action in a video using pre-trained [Resnet 3D](https://github.com/kenshohara/3D-ResNets-PyTorch/blob/master/models/resnet.py) PyTorch models. Deployed on AWS Cloud using ECS, S3, EventBridge, and lambda. 
+A service that predicts human action in a video using pre-trained [Resnet 3D](https://github.com/kenshohara/3D-ResNets-PyTorch/blob/master/models/resnet.py) PyTorch models. Deployed on AWS Cloud using ECS, S3, EventBridge, and Lambda. 
 
 
 
